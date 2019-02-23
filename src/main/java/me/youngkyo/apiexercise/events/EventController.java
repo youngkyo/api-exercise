@@ -21,13 +21,13 @@ public class EventController {
     EventRepository eventRepository;
 
     @PostMapping("/api/events")
-    public ResponseEntity createEvent(@RequestBody Event event) {
+    public ResponseEntity createEvent(@RequestBody EventDto eventDto) {
+        Event event = modelMapper.map(eventDto, Event.class);
         Event savedEvent = eventRepository.save(event);
         URI createdUri = linkTo(EventController.class)
                 .slash(savedEvent.getId())
                 .toUri();
 
-        return ResponseEntity.created(createdUri).body(savedEvent);
-
+        return ResponseEntity.created(createdUri).body(event);
     }
 }
