@@ -1,34 +1,38 @@
 package me.youngkyo.apiexercise.events;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode(of = "id")
-@Entity
-public class Event {
+@Data
+@Builder @NoArgsConstructor @AllArgsConstructor
+public class EventDto {
 
-    @Id @GeneratedValue
-    private Integer id;
+    @NotEmpty
     private String name;
+
+    @NotEmpty
     private String description;
+    @NotNull
     private LocalDateTime beginEnrollmentDateTime;
+    @NotNull
     private LocalDateTime closeEnrollmentDateTime;
+    @NotNull
     private LocalDateTime beginEventDateTime;
+    @NotNull
     private LocalDateTime endEventDateTime;
+
     private String location;
+    @Min(0)
     private int basePrice;
+    @Min(0)
     private int maxPrice;
     private int limitOfEnrollment;
-    private boolean offline;
-    private boolean free;
 
-    @Enumerated(EnumType.STRING)
-    private EventStatus eventStatus;
 }

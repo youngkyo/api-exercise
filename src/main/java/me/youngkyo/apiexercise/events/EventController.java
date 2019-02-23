@@ -1,5 +1,6 @@
 package me.youngkyo.apiexercise.events;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,13 +15,16 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 public class EventController {
 
     @Autowired
+    ModelMapper modelMapper;
+
+    @Autowired
     EventRepository eventRepository;
 
     @PostMapping("/api/events")
     public ResponseEntity createEvent(@RequestBody Event event) {
         Event savedEvent = eventRepository.save(event);
         URI createdUri = linkTo(EventController.class)
-                .slash("{id}")
+                .slash(savedEvent.getId())
                 .toUri();
 
         return ResponseEntity.created(createdUri).body(savedEvent);
