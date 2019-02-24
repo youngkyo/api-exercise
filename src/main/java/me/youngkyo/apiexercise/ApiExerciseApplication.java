@@ -12,9 +12,4 @@ public class ApiExerciseApplication {
         SpringApplication.run(ApiExerciseApplication.class, args);
     }
 
-
-    @Bean
-    public ModelMapper modelMapper() {
-        return new ModelMapper();
-    }
 }
