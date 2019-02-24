@@ -1,11 +1,10 @@
 package me.youngkyo.apiexercise.events;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-//@RunWith()
+
 public class EventTest {
 
     @Test
@@ -14,4 +13,12 @@ public class EventTest {
         assertThat(event).isNotNull();
     }
 
+
+    @Test
+    public void testFree() {
+        Event event = Event.builder().basePrice(0)
+                .maxPrice(0).build();
+
+        assertThat(event.isFree()).isTrue();
+    }
 }

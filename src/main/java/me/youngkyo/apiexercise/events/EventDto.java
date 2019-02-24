@@ -16,7 +16,6 @@ public class EventDto {
 
     @NotEmpty
     private String name;
-
     @NotEmpty
     private String description;
     @NotNull
